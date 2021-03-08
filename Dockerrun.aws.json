@@ -1,0 +1,36 @@
+{
+	"AWSDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "client",
+			"image": "shreekarhegde/multi-client",
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "shreekarhegde/multi-server",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "shreekarhegde/multi-worker",
+			"hostname": "worker",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"image": "shreekarhegde/multi-nginx",
+			"hostname": "nginx",
+			"essential": true,
+			"portMappings": [
+			 {
+				"hostPort": 80,
+				"containerPort": 80
+			 }
+			],
+			"links": ["client", "server"]
+		}
+	] 
+}
